@@ -6,6 +6,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Routing;
 using System.Web.Http.Cors;
+using System.Net.Http.Headers;
 
 namespace Readify.KnockKnock.WebAPI
 {
@@ -18,6 +19,8 @@ namespace Readify.KnockKnock.WebAPI
             //configure the JSON formatter
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            GlobalConfiguration.Configuration.Formatters.Insert(0, jsonFormatter);
 
             // Attribute routing.
             config.MapHttpAttributeRoutes();
@@ -28,6 +31,7 @@ namespace Readify.KnockKnock.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
         }
     }
 }

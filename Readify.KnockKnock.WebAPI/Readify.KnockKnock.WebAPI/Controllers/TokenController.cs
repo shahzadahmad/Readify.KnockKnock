@@ -13,7 +13,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
     public class TokenController : BaseApiController
     {
         // The Readify token associated with the shehzadahmed.se@gmail.com email.
-        protected Guid token = new Guid("06be631a-df11-43ec-84ec-05236e8d1549");        
+        protected Guid token = new Guid("3a505596-649e-4ce3-bad0-5c912f4731f9");          
 
         protected TelemetryClient telemetry = new TelemetryClient();
 

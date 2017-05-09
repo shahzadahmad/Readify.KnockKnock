@@ -31,12 +31,12 @@ namespace Readify.KnockKnock.WebAPI.Controllers
             {
                 if (n > threshold)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Value cannot be greater than {threshold}, since the result will cause a 64-bit integer overflow.");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
 
                 if (n < -threshold)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Value cannot be less than {-threshold}, since the result will cause a 64-bit integer overflow.");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
 
                 var key = string.Format("FibonacciNumber{0}", n);

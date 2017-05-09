@@ -25,13 +25,13 @@ namespace Readify.KnockKnock.WebAPI.Controllers
         /// GET: api/ReverseWords/Apple
         [HttpGet]
         //[Route("{sentence}")]
-        public HttpResponseMessage GetReverseWords(string sentence)
+        public HttpResponseMessage GetReverseWords(string sentence = "")
         {
             try
             {
                 if (sentence == null)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Value cannot be null.");
+                    return Request.CreateResponse(HttpStatusCode.OK, String.Empty);
                 }
 
                 var key = string.Format("ReverseWords{0}", sentence.GetHashCode());
@@ -58,14 +58,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
                     MemoryCache.Default.Add(new CacheItem(key, result), new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(6) });
                 }
 
-                if (result != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, result);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NoContent);
-                }
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
             {

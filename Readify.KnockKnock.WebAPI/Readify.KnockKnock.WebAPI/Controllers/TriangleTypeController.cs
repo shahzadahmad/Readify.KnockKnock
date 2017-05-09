@@ -21,6 +21,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
         /// <param name="c">The length of side 'c'.</param>
         /// <returns>The <see cref="TriangleType"/> type.</returns>
         [HttpGet]
+        //[Route("a/{a:int}/b/{b:int}/c/{c:int}")]
         public HttpResponseMessage GetTriangleType(int a, int b, int c)
         {
             try
@@ -38,7 +39,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
                 {
                     if (!this.IsExistentTriangle(a, b, c))
                     {
-                        return Request.CreateResponse(HttpStatusCode.OK, TriangleType.Error);
+                        return Request.CreateResponse(HttpStatusCode.OK, TriangleType.Error.ToString());
                     }
                     else if (this.IsEquilateralType(a, b, c))
                     {
@@ -56,15 +57,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
                     MemoryCache.Default.Add(new CacheItem(key, result), new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(6) });
                 }
 
-                if (result != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, result);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NoContent);
-                }
-
+                return Request.CreateResponse(HttpStatusCode.OK, result.ToString());
             }
             catch (Exception ex)
             {
