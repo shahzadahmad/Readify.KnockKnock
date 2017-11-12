@@ -67,6 +67,7 @@ namespace Readify.KnockKnock.WebAPI.Controllers
 
         #region Protected Methods
 
+        // This method check is this existent triangle.
         protected bool IsExistentTriangle(int a, int b, int c)
         {
             bool triangleExist = true;
